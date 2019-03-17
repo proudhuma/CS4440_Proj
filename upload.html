@@ -1,19 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <link rel="icon" href="favicon.ico" type="image/x-icon" />
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
-</head>
 <body>
 <h2>CS 4440 Project</h2>
 
-<form enctype="multipart/form-data" action="#" method="POST">
-<input type="hidden" name="MAX_FILE_SIZE" value="100000" />
-Choose a file to upload: <input name="uploadedfile" type="file" /><br />
-<input type="submit" value="Upload File" />
+<form enctype="multipart/form-data" action="../uploader" method="POST">
+<input name="file" type="file" /><br />
+<input type="submit"/>
 </form>
 
-<button onclick="location.href='index'">Return</button>
+<button onclick="location.href='../'">Return</button>
 
 </body>
 </html>
