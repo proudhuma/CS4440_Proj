@@ -1,0 +1,28 @@
+------WebKitFormBoundaryxF8SCy6D6wvW6fXi
+Content-Disposition: form-data; name="MAX_FILE_SIZE"
+
+100000
+------WebKitFormBoundaryxF8SCy6D6wvW6fXi
+Content-Disposition: form-data; name="uploadedfile"; filename="test.py"
+Content-Type: application/octet-stream
+
+import sys 
+for line in sys.stdin:
+    a = line.split()
+    inVal = int(a[0])
+    ret = 1024-inVal
+    count = 0
+    while ret >= 64:
+    	count += 1
+    	ret -= 64
+    while ret >= 16:
+    	count += 1
+    	ret -= 16
+    while ret >= 4:
+    	count += 1
+    	ret -= 4
+    if ret > 0:
+    	print(count + ret)
+    else:
+    	print(count)
+------WebKitFormBoundaryxF8SCy6D6wvW6fXi--
