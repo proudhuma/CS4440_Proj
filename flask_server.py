@@ -61,13 +61,13 @@ def upload_file():
         for tag in all_tags:
             name_str += str(tag)
         m = hashlib.sha256()
-        m.update(name_str)
+        m.update(name_str.encode('utf-8'))
         hashed_str = m.hexdigest()
 
         one_document = {"name" : hashed_str, "time" : cur_time, "tag" : all_tags}
         
         result = mongo.db.pic.insert_one(one_document)
-        print(str(result.inserted_count) + " document is inserted succesfully")
+        print(result)
         
         '''
         upload the tmpfile to azure with name=hash
