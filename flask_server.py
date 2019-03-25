@@ -1,11 +1,12 @@
 import os
 import time
 import hashlib
-from flask import Flask, flash, request, redirect, url_for
+from flask import Flask, flash, request, redirect, url_for, render_template
 from flask_pymongo import PyMongo
 from werkzeug.utils import secure_filename
 
 UPLOAD_FOLDER = '/tmp'
+DOWNLOAD_FOLDER = '/down'
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
 
@@ -17,9 +18,7 @@ mongo = PyMongo(app)
 
 @app.route('/')
 def index():
-    f = open("./index.html")
-    content = f.read()
-    return bytes(content, 'UTF-8')
+    return render_template("index.html")
 
 @app.route('/upload', methods=['GET', 'POST'])
 def up():
@@ -33,9 +32,7 @@ def up():
         f = request.files['file']
         f.save(secure_filename(f.filename))
 
-        f = open("success.html")
-        response = f.read()
-        return bytes(response, 'UTF-8')
+        return render_template("success.html")
 
 @app.route('/uploader', methods = ['GET', 'POST'])
 def upload_file():
@@ -73,17 +70,28 @@ def upload_file():
         upload the tmpfile to azure with name=hash
         '''
 
-        ff = open("success.html")
-        response = ff.read()
-        return bytes(response, 'UTF-8')
+        return render_template("success.html")
 
 @app.route('/download', methods=['GET', 'POST'])
 def down():
     if request.method == 'GET':
-        f = open("./download.html")
-        content = f.read()
-        return bytes(content, 'UTF-8')
+        return render_template("download.html")
     else:
-        f = open("success.html")
-        response = f.read()
-        return bytes(response, 'UTF-8')
+        return render_template("success.html")
+
+@app.route('/downloader', methods=['GET','POST'])
+def find_file():
+    if request.method == 'POST':
+        start_time = request.form['start_time']
+        end_time = request.form['end_time']
+        all_tags = request.form['tags']
+        print(start_time, end_time, all_tags)
+        # parse all tags
+
+        # search on mongodb
+
+        # download the pics from azure
+
+        # show the pictures
+
+        return render_template("select.html")
